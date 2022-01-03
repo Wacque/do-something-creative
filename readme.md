@@ -4,6 +4,12 @@
 
 ### Demos
 
+run demo
+
+```
+npm install && npm run serve
+```
+
 1.sketch_1
 
 ![sketch_1](https://raw.githubusercontent.com/Wacque/do-something-creative/master/output/image/sketch_1.png)
