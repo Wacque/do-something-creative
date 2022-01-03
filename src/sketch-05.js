@@ -2,14 +2,13 @@ const canvasSketch = require('canvas-sketch');
 const {random} = require("canvas-sketch-util");
 
 const settings = {
-    dimensions: [1080, 1080],
-    // animate: true
+    dimensions: [1080, 1080]
 };
 
 let text = 'A'
 let fontSize = 1200
-const fontFamily = 'Verdana'
 let manager
+const fontFamily = 'Verdana'
 
 const typeCanvas = document.createElement('canvas')
 const typeContext = typeCanvas.getContext('2d')
@@ -64,16 +63,11 @@ const sketch = ({context, width, height}) => {
         typeContext.restore()
 
         const typeData = typeContext.getImageData(0, 0, cols, rows).data
-        console.log(typeData.length)
 
         context.fillStyle = 'black'
         context.fillRect(0, 0, width, height)
-
         context.textBaseline = 'middle'
         context.textAlign = 'center'
-
-
-        // context.drawImage(typeCanvas, 0, 0)
 
         for (let i = 0; i < numCells; i++) {
             const col = i % cols
@@ -83,13 +77,14 @@ const sketch = ({context, width, height}) => {
             const y = row * cell
 
             const r = typeData[i * 4 + 0]
-            const g = typeData[i * 4 + 1]
-            const b = typeData[i * 4 + 2]
-            const a = typeData[i * 4 + 3]
+            // const g = typeData[i * 4 + 1]
+            // const b = typeData[i * 4 + 2]
+            // const a = typeData[i * 4 + 3]
 
             const glyph = getGlyph(r)
 
             context.font = `${cell * 2}px ${fontFamily}`
+
             if (Math.random() < 0.1) context.font = `${cell * 6}px ${fontFamily}`
 
             context.fillStyle = `white`
@@ -97,8 +92,6 @@ const sketch = ({context, width, height}) => {
             context.save()
             context.translate(x, y)
             context.translate(cell * 0.5, cell * 0.5)
-            // context.fillRect(0, 0, cell, cell)
-
             context.fillText(glyph, 0, 0)
             context.restore()
         }
